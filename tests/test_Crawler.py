@@ -17,4 +17,7 @@ class TestCrawler:
         assert len(agents) == len(max_pages)
     def test_get_all_page_urls(self, crawler):
         all_page_urls = crawler._get_all_page_urls()
-        print(len(all_page_urls))
+        assert len(all_page_urls) >= 450
+    def test_crawl(self, crawler):
+        product_list = crawler.crawl()
+        print(len(product_list))

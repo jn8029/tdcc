@@ -37,7 +37,6 @@ def product_list_parser():
     yield parser
 
 
-
 class TestSearchOptionParser(object):
     def test_get_master_agents(self, search_option_parser):
         agents = search_option_parser.get_master_agents()
