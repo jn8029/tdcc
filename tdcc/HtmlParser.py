@@ -2,10 +2,9 @@ from bs4 import BeautifulSoup
 
 class HtmlParser:
     def __init__(self, response):
-
         self._response = response
+        assert response.status_code == 200
         html = self._response.text
-
         self._parser = BeautifulSoup(html, 'html.parser')
 
 class SearchOptionParser(HtmlParser):
@@ -31,8 +30,12 @@ class ProductListParser(HtmlParser):
         <img src="/Snoteanc/images/lp.gif" style="border:none" onclick="setPage('30')">
         """
         last_page_button = self._parser.find("img", {"src" : "/Snoteanc/images/lp.gif"})
-        max_page = last_page_button.get("onclick").split("'")[1]
+        if last_page_button:
+            max_page = last_page_button.get("onclick").split("'")[1]
+        else:
+            max_page = 1
         return int(max_page)
+
     def get_product_list(self):
         """
         Returns:
