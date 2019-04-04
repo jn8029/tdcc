@@ -5,7 +5,7 @@
 ![Github Last Commit](https://img.shields.io/github/last-commit/jn8029/tdcc.svg)
 
 
-This is a repository that offers a StructuredProductCrawler class to crawl [Taiwan TDCC](structurednotes.tdcc.com.tw/) website for the product information.
+This is a repository that offers a StructuredProductCrawler class to crawl [Taiwan TDCC](https://structurednotes.tdcc.com.tw/) website for the product information.
 
 ```
 
