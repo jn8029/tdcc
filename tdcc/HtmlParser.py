@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import pandas as pd
+
 class HtmlParser:
     def __init__(self, response):
         self._response = response
