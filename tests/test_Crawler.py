@@ -20,4 +20,4 @@ class TestCrawler:
         assert len(all_page_urls) >= 450
     def test_crawl(self, crawler):
         product_list = crawler.crawl()
-        print(len(product_list))
+        assert len(product) >= 21766
