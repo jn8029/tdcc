@@ -21,3 +21,7 @@ class TestCrawler:
     def test_crawl(self, crawler):
         product_list = crawler.crawl()
         assert len(product) >= 21766
+    def test_get_product_info(self, crawler):
+        test_url ='/Snoteanc/apps/bas/BAS290.jsp?fundUuid=17f92894:14f2e3f3cd2:-677b'
+        info = crawler._get_product_info(test_url)
+        print(info)

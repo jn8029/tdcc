@@ -49,11 +49,19 @@ class ProductListParser(HtmlParser):
             tds = row.select("td")
             if len(tds)!=11:
                 continue
+            df_row.append(tds[0].get("onclick").split("'")[1])
             for td in tds:
                 df_row.append(td.text.replace("\n","").replace("\t","").replace("\r","").replace("\xa0","").strip())
             df_rows.append(df_row)
+
+
         return df_rows
 
 class ProductParser(HtmlParser):
     def __init__(self, response):
         super().__init__(response)
+    def get_product_info(self,distributor=True):
+        
+        pass
+        # distributor_tag =  [x for x in self._parser.findAll("font") if "受託或銷售機構名稱" in x.get_text()][0]
+        # return distributor_tag.parents

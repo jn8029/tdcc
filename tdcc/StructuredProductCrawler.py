@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from .HtmlParser import SearchOptionParser, ProductListParser
+from .HtmlParser import SearchOptionParser, ProductListParser, ProductParser
 import threading
 import time
 
@@ -9,8 +9,21 @@ class StructuredProductCrawler:
                 'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
             }
     def __init__(self):
+        self.df_headers = [
+            'URL',
+            'UID',
+            'NAME',
+            'CURRENCY',
+            'MATURITY',
+            'UNDERLYING',
+            'PRINCIPAL_PROTECTION',
+            'PI',
+            'ISSUE_DATE',
+            'ISSUER',
+            'MASTER_AGENT',
+            'DISTRIBUTOR']
         self.index_url = "https://structurednotes-announce.tdcc.com.tw/Snoteanc/apps/bas/BAS210.jsp"
-        self.product_url = self.index_url + "?fundUuid={fund_id}"
+        self.product_url = "https://structurednotes-announce.tdcc.com.tw{product_partial_url}"
         self.max_pages = {}
         self.products = []
         self.queries = [
@@ -66,8 +79,16 @@ class StructuredProductCrawler:
         print("received {}".format(url))
         parser = ProductListParser(response)
         product_list = parser.get_product_list()
-
         self.products += product_list
+
+    def _get_product_info(self, product_partial_url):
+        url = self.product_url.format(product_partial_url = product_partial_url)
+        response = requests.get(url, headers=self.headers)
+        parser = ProductParser(response)
+        missing_product_info = parser.get_product_info(distributor=True)
+        return missing_product_info
+
+
     def crawl(self):
         threads =[]
         page_urls = self._get_all_page_urls()

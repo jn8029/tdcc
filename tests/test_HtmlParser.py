@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from tdcc import SearchOptionParser, ProductListParser
+from tdcc import SearchOptionParser, ProductListParser, ProductParser
 import requests
 
 index_url = "https://structurednotes-announce.tdcc.com.tw/Snoteanc/apps/bas/BAS210.jsp"

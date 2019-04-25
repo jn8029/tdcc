@@ -33,4 +33,4 @@ pip install git+git://github.com/jn8029/tdcc.git
 
 ## To-do
 
-* TBC
+* implement class ProductParser(HtmlParser): for some products, the distributor information is only displayed in the product detail page, so this class is needed to go into the product detail page and grab the missing information.
