@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 from tdcc import StructuredProductCrawler
-
+import pandas as pd
 @pytest.fixture(scope='session')
 def crawler():
     crawler = StructuredProductCrawler()
@@ -20,8 +20,14 @@ class TestCrawler:
         assert len(all_page_urls) >= 450
     def test_crawl(self, crawler):
         product_list = crawler.crawl()
-        assert len(product) >= 21766
+        product_list.to_csv("test.csv",index=False)
+        assert len(product_list) >= 21766
     def test_get_product_info(self, crawler):
         test_url ='/Snoteanc/apps/bas/BAS290.jsp?fundUuid=17f92894:14f2e3f3cd2:-677b'
         info = crawler._get_product_info(test_url)
-        print(info)
+        assert len(info)==1
+    def test_get_missing_distributor(self,crawler):
+        crawler.products = pd.read_csv("test.csv")
+        crawler._crawl_missing_distributor()
+        print(crawler.products[crawler.products["DISTRIBUTOR"].isin(["Y","N"])])
+        assert len(crawler.products[crawler.products["DISTRIBUTOR"].isin(["Y","N"])])==0

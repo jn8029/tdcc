@@ -7,6 +7,8 @@
 
 This is a repository that offers a StructuredProductCrawler class to crawl [Taiwan TDCC](https://structurednotes.tdcc.com.tw/) website for the product information.
 
+## Tutorial
+
 ```
 
 from tdcc import StructuredProductCrawler
@@ -14,6 +16,25 @@ crawler = StructuredProductCrawler()
 all_products = crawler.crawl()
 
 ```
+```crawl()``` returns a Pandas DataFrame.
+Data columns include:
+
+| Column Name        | Are           |
+| ------------- |:-------------:|
+|URL| the product's partial url|
+|UID| product id|
+|NAME| product name|
+|CURRENCY| product denomination|
+|MATURITY| maturity date|
+|UNDERLYING| underlying asset type|
+|PRINCIPAL_PROTECTION| % of principal protection|
+|PI| professional investor |
+|ISSUE_DATE| issue date|
+|ISSUER| issuer|
+|MASTER_AGENT| master agent|
+|DISTRIBUTOR| distributor|
+
+
 
 ## Installation
 To install [this verson from PyPI](https://pypi.org/project/tdcc/), type:
@@ -33,4 +54,4 @@ pip install git+git://github.com/jn8029/tdcc.git
 
 ## To-do
 
-* implement class ProductParser(HtmlParser): for some products, the distributor information is only displayed in the product detail page, so this class is needed to go into the product detail page and grab the missing information.
+TBC

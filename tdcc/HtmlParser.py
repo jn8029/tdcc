@@ -5,7 +5,7 @@ class HtmlParser:
         self._response = response
         assert response.status_code == 200
         html = self._response.text
-        self._parser = BeautifulSoup(html, 'html.parser')
+        self._parser = BeautifulSoup(html, 'html5lib')
 
 class SearchOptionParser(HtmlParser):
     def __init__(self, response):
@@ -51,17 +51,17 @@ class ProductListParser(HtmlParser):
                 continue
             df_row.append(tds[0].get("onclick").split("'")[1])
             for td in tds:
-                df_row.append(td.text.replace("\n","").replace("\t","").replace("\r","").replace("\xa0","").strip())
+                df_row.append(td.text.replace("\n","").replace("\t","").replace("\r","").replace("\xa0","").replace("&nbsp;","").strip())
             df_rows.append(df_row)
-
-
         return df_rows
 
 class ProductParser(HtmlParser):
     def __init__(self, response):
         super().__init__(response)
-    def get_product_info(self,distributor=True):
-        
-        pass
-        # distributor_tag =  [x for x in self._parser.findAll("font") if "受託或銷售機構名稱" in x.get_text()][0]
-        # return distributor_tag.parents
+    def get_product_distributors(self):
+        distributors = []
+        distributor_rows = self._parser.find("span",{"id":"div2"}).select("tr td table")[-1].findAll("tr")[2:]
+        for row in distributor_rows:
+            distributor = row.findAll("td")[1].text.replace("\n","").replace("\t","").replace("\r","").replace("\xa0","").replace("&nbsp;","").strip()
+            distributors.append(distributor)
+        return distributors

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tdcc",
-    version="0.0.1",
+    version="0.0.2",
     author="jn8029",
     author_email="warren.y.cheng@gmail.com",
     description="A crawler for structured product information from TDCC (Taiwan).",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/jn8029/tdcc",
     packages=setuptools.find_packages(),
-    install_requires=['bs4', 'requests'],
+    install_requires=['bs4', 'requests', 'html5lib'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

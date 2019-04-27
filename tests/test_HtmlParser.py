@@ -45,9 +45,9 @@ class TestSearchOptionParser(object):
         distro = search_option_parser.get_distributors()
         assert len(distro) >= 46
 
-class TestProdcutListParser(object):
+class TestProductListParser(object):
     def test_get_product_list(self, product_list_parser):
         product_list = product_list_parser.get_product_list()
         assert len(product_list)>=50
     def test_get_max_list_page(self, product_list_parser):
-        assert 30 == product_list_parser.get_max_list_page()
+        assert 30 <= product_list_parser.get_max_list_page()
