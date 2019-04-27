@@ -59,6 +59,7 @@ class ProductParser(HtmlParser):
     def __init__(self, response):
         super().__init__(response)
     def get_product_distributors(self):
+        # need to crawl maturity date individually because the website table is showing call date.
         distributors = []
         distributor_rows = self._parser.find("span",{"id":"div2"}).select("tr td table")[-1].findAll("tr")[2:]
         for row in distributor_rows:
